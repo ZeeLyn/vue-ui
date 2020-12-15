@@ -15,6 +15,9 @@ export default {
     methods: {
         showLoading() {
             this.$showLoading("loading...");
+            setTimeout(() => {
+                this.$hideLoading();
+            }, 2000);
         },
         showDialog() {
             this.$alert({
