@@ -1,7 +1,8 @@
 {
   "name": "@g1100100/vue-ui",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "private": false,
+  "main": "lib/vue-ui.umd.min.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/1100100/vue-ui"
@@ -15,10 +16,10 @@
     "lib": "vue-cli-service build --target lib --name vue-ui --dest lib packages/index.js"
   },
   "dependencies": {
-    "vue": "^2.6.11",
-    "vue-router": "^3.2.0"
+    "vue": "^2.6.11"
   },
   "devDependencies": {
+    "vue-router": "^3.2.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
