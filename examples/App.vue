@@ -10,7 +10,7 @@
     </div>
 </template>
 <script>
-import Vue from "vue";
+import { getCurrentInstance } from "vue";
 export default {
     data() {
         return {
@@ -19,15 +19,16 @@ export default {
             dialogOptions: {},
         };
     },
-    mounted() {
-        Vue.prototype.$showLoading = (_msg) => {
+    beforeCreate() {
+        const app = getCurrentInstance();
+        app.appContext.config.globalProperties.$showLoading = (_msg) => {
             if (_msg) this.msg = _msg;
             this.showLoading = true;
         };
-        Vue.prototype.$hideLoading = () => {
+        app.appContext.config.globalProperties.$hideLoading = () => {
             this.showLoading = false;
         };
-        Vue.prototype.$alert = (arg) => {
+        app.appContext.config.globalProperties.$alert = (arg) => {
             this.dialogOptions = arg;
         };
     },

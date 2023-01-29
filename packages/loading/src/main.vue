@@ -40,8 +40,8 @@ export default {
     justify-content: center;
 }
 .load-container .loader label {
-    font-size: 12px;
-    margin-top: 3px;
+    font-size: 13px;
+    margin-top: 5px;
     color: #fff;
 }
 .load-container .loading {

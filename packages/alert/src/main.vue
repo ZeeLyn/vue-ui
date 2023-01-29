@@ -4,12 +4,7 @@
             <div class="title" v-if="arg.title">{{ arg.title }}</div>
             <div class="content">{{ arg.content }}</div>
             <div class="oper">
-                <div
-                    class="cancel-btn"
-                    :style="'color:' + arg.cancelColor"
-                    v-if="arg.showCancel"
-                    @click="OnCancel"
-                >
+                <div class="cancel-btn" :style="'color:' + arg.cancelColor" v-if="arg.showCancel" @click="OnCancel">
                     {{ arg.cancelText }}
                 </div>
                 <div :style="'color:' + arg.confirmColor" @click="OnConfirm">
@@ -44,7 +39,7 @@ export default {
         };
     },
     watch: {
-        options: function (newVal) {
+        options: function(newVal) {
             var _arg = {};
             Object.assign(_arg, this.defaultOptions, newVal, { show: true });
             this.arg = _arg;
@@ -90,12 +85,14 @@ export default {
     padding: 0 15px 0 15px;
     color: #fff;
     margin-top: 10px;
+    text-align: center;
 }
 .dialog-container .content {
     padding: 0 15px 0 15px;
     margin-top: 10px;
-    font-size: 12px;
+    font-size: 13px;
     color: #eee;
+    text-align: center;
 }
 .dialog-container .oper {
     margin-top: 15px;
