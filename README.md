@@ -1,39 +1,55 @@
 # vue-ui
 
 ## Project setup
-```
-npm install
-```
 
-### Compiles and hot-reloads for development
+```ps1
+npm install @zeelyn/vue-ui
 ```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
 
 ## Usage
 Modify main.js
 ```javascript
 
-import vueUI from "@g1100100/vue-ui"
-Vue.use(vueUI);
-import "@g1100100/vue-ui/lib/vue-ui.css"
-
+import VueUI from "@zeelyn/vue-ui";
+import "@zeelyn/vue-ui/dist/index.css";
+const app = createApp(App);
+app.use(VueUI);
 ```
-```html
-<vue-ui-loading v-if="showLoading" :msg="msg"></vue-ui-loading>
-<vue-ui-alert :options="dialog"></vue-ui-alert>
+
+```javascript
+this.$loading.show();
+this.$loading.hide();
+this.$alert({
+            title: "this is title",
+            message: "this is content",
+            showCancel: true,
+            confirmText: "OK",
+            cancelText: "Cancel",
+            confirmColor: "#fff",
+            cancelColor: "#ff0000",
+            onConfirm: () => {
+                console.warn("click ok");
+            },
+            onCancel: () => {
+                console.warn("click cancel");
+            },
+        })
+            .then(() => {
+                console.log("confirm");
+            })
+            .catch(() => {
+                console.log("cancel");
+            });
+this.$alert("This is message");
+this.$toast.show({
+                    message: "This is toast content!",
+                    icon: "success",
+                })
+                .then(() => {
+                    console.log("toast closed");
+                });
+this.$toast.success("This is message!");
+this.$toast.error("This is message!");
+this.$toast.warning("This is message!");
+this.$toast.info("This is message!");
 ```

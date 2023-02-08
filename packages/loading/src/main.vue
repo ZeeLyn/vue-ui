@@ -1,8 +1,8 @@
 <template>
-    <div class="load-container">
+    <div class="load-container" v-if="visible">
         <div class="loader">
             <div class="loading"></div>
-            <label>{{ msg }}</label>
+            <label v-show="message">{{ message }}</label>
         </div>
     </div>
 </template>
@@ -10,8 +10,22 @@
 <script>
 export default {
     name: "vue-ui-loading",
-    props: {
-        msg: String,
+
+    data() {
+        return {
+            visible: false,
+            message: "",
+        };
+    },
+    methods: {
+        show(message) {
+            this.message = message;
+            this.visible = true;
+        },
+        hide() {
+            this.visible = false;
+            this.message = "";
+        },
     },
 };
 </script>
@@ -24,24 +38,25 @@ export default {
     top: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.3);
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     z-index: 9999998;
 }
 .load-container .loader {
     background: rgba(0, 0, 0, 0.8);
-    padding: 15px 25px;
-    border-radius: 5px;
+    padding: 25px 35px;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 .load-container .loader label {
-    font-size: 13px;
-    margin-top: 5px;
+    font-size: 14px;
+    margin-top: 15px;
     color: #fff;
 }
 .load-container .loading {

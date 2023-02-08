@@ -5,33 +5,16 @@
             <router-link to="/about">About</router-link>
         </div>
         <router-view />
-        <vue-ui-loading v-if="showLoading" :msg="msg"></vue-ui-loading>
-        <vue-ui-alert :options="dialogOptions"></vue-ui-alert>
+        <!-- <vue-ui-loading v-if="showLoading" :message="msg"></vue-ui-loading> -->
+        <!-- <vue-ui-alert :options="dialogOptions"></vue-ui-alert> -->
     </div>
 </template>
 <script>
-import { getCurrentInstance } from "vue";
 export default {
     data() {
-        return {
-            msg: "",
-            showLoading: false,
-            dialogOptions: {},
-        };
+        return {};
     },
-    beforeCreate() {
-        const app = getCurrentInstance();
-        app.appContext.config.globalProperties.$showLoading = (_msg) => {
-            if (_msg) this.msg = _msg;
-            this.showLoading = true;
-        };
-        app.appContext.config.globalProperties.$hideLoading = () => {
-            this.showLoading = false;
-        };
-        app.appContext.config.globalProperties.$alert = (arg) => {
-            this.dialogOptions = arg;
-        };
-    },
+    beforeCreate() {},
 };
 </script>
 
