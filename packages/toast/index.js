@@ -7,9 +7,10 @@ toast.install = (app, opts) => {
 
     app.component(toast.name, toast);
     const plugin = createApp(toast, { opts });
+    var alias = opts.alias?.toast || "$toast";
     const instance = plugin.mount(document.createElement("div"));
     document.body.appendChild(instance.$el);
-    app.config.globalProperties.$toast = {
+    app.config.globalProperties[alias] = {
         show(_opts) {
             return instance.show(_opts);
         },

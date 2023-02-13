@@ -10,9 +10,10 @@ loading.install = (app, opts) => {
     const plugin = createApp(loading, {
         opts,
     });
+    var alias = opts.alias?.loading || "$loading";
     const instance = plugin.mount(document.createElement("div"));
     document.body.appendChild(instance.$el);
-    app.config.globalProperties.$loading = {
+    app.config.globalProperties[alias] = {
         show(message = "loading", _opts = null) {
             instance.show(message, _opts);
         },
