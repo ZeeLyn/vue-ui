@@ -60,7 +60,6 @@ export default {
         show(opts) {
             if (typeof opts == "string") opts = { message: opts };
             this.options = Object.assign({}, this.def, opts);
-            console.log(this.options);
             this.visible = true;
             var self = this;
             return new Promise((resolve, reject) => {

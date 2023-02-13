@@ -49,7 +49,6 @@ export default {
         hide() {
             this.visible = false;
             if (this.timer) clearTimeout(this.timer);
-            this.options = {};
         },
     },
 };
