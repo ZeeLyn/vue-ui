@@ -16,8 +16,9 @@ export default {
     name: "home-view",
     components: {},
     mounted() {
-        // const app = (this.app = getCurrentInstance());
-        // console.log(app.proxy.$loading);
+        //this.$loading.show("LOADING...");
+        // this.showDialog();
+        // this.showToast();
     },
 
     methods: {
@@ -39,13 +40,13 @@ export default {
             // this.$alert("no null!");
 
             this.$alert({
-                title: "this is title",
-                message: "this is content",
+                title: "This is title",
+                message: "This is contentThis is contentThis is contentThis is contentThis is contentThis is contentThis is content",
                 showCancel: true,
                 confirmText: "OK",
                 cancelText: "Cancel",
-                confirmColor: "#fff",
-                cancelColor: "#ff0000",
+                // confirmColor: "#fff",
+                // cancelColor: "#ff0000",
                 onConfirm: () => {
                     console.warn("click ok");
                 },
@@ -74,3 +75,8 @@ export default {
     },
 };
 </script>
+<style scoped>
+.home {
+    height: 3000px;
+}
+</style>

@@ -6,12 +6,12 @@ import toast from "./toast/index";
 const components = [loading, alert, toast];
 
 // 定义 install 方法
-const install = function (app) {
+const install = function (app, opts) {
     if (install.installed) return;
     install.installed = true;
     // 遍历并注册全局组件
     components.map((component) => {
-        component.install(app);
+        component.install(app, opts);
     });
 };
 
