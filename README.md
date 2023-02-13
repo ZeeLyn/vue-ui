@@ -13,7 +13,11 @@ Modify main.js
 import VueUI from "@zeelyn/vue-ui";
 import "@zeelyn/vue-ui/dist/index.css";
 const app = createApp(App);
-app.use(VueUI);
+app.use(VueUI,{
+    theme:"dark",//or light
+    minWidth:100,
+    maxWidth:300
+});
 ```
 
 ```javascript
