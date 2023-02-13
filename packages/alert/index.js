@@ -7,7 +7,7 @@ alert.install = (app, opts) => {
 
     app.component(alert.name, alert);
     const plugin = createApp(alert, { opts });
-    var alias = opts.alias?.alert || "$alert";
+    var alias = opts?.alias?.alert || "$alert";
     const instance = plugin.mount(document.createElement("div"));
     document.body.appendChild(instance.$el);
     app.config.globalProperties[alias] = function (_opts) {

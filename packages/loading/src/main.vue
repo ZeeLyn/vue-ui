@@ -1,5 +1,5 @@
 <template>
-    <transition name="fade">
+    <transition name="vue-ui-fade">
         <div class="load-container" :class="`vue-ui-theme-${options.theme}`" v-if="visible" @touchmove.prevent @mousewheel.prevent>
             <div class="loader" :style="`${_readerStyle('min-width', options.minWidth)}${_readerStyle('max-width', options.maxWidth)}${_readerStyle('width', options.width)}`">
                 <div class="loading" :style="`width:${options.radius}px;height:${options.radius}px;`"></div>
@@ -48,20 +48,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 @import url("../../global.css");
-.fade-enter-active {
-    animation: fade-in-out 0.5s forwards;
-}
-.fade-leave-active {
-    animation: fade-in-out 0.5s forwards reverse;
-}
-@keyframes fade-in-out {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
+
 .load-container {
     font-family: "PingFangSC-Regular", "Microsoft YaHei", Helvetica, Arial, sans-serif;
     position: fixed;

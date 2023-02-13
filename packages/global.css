@@ -7,3 +7,17 @@
     --vue-ui-title-size: 15px;
     --vue-ui-message-size: 14px;
 }
+.vue-ui-fade-enter-active {
+    animation: vue-ui-fade-in-out 0.2s forwards;
+}
+.vue-ui-fade-leave-active {
+    animation: vue-ui-fade-in-out 0.2s forwards reverse;
+}
+@keyframes vue-ui-fade-in-out {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

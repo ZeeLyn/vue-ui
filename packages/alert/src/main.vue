@@ -1,5 +1,5 @@
 <template>
-    <transition name="fade">
+    <transition name="vue-ui-fade">
         <div class="dialog-mask" v-if="visible" @touchmove.prevent @mousewheel.prevent>
             <div class="dialog-container" :class="`vue-ui-theme-${options.theme}`" :style="`${_readerStyle('min-width', options.minWidth)}${_readerStyle('max-width', options.maxWidth)}${_readerStyle('width', options.width)}`">
                 <div class="title" v-show="options.title">{{ options.title }}</div>
@@ -84,20 +84,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 @import url("../../global.css");
-.fade-enter-active {
-    animation: fade-in-out 0.2s forwards;
-}
-.fade-leave-active {
-    animation: fade-in-out 0.2s forwards reverse;
-}
-@keyframes fade-in-out {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
+
 .dialog-mask {
     position: fixed;
     left: 0;
