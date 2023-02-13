@@ -2,8 +2,8 @@
     <transition name="vue-ui-fade">
         <div class="toast-mask" v-if="visible" @touchmove.prevent @mousewheel.prevent>
             <div class="toast-container" :class="`vue-ui-theme-${options.theme}`" :style="`${_readerStyle('min-width', options.minWidth)}${_readerStyle('max-width', options.maxWidth)}${_readerStyle('width', options.width)}`">
-                <img :src="options.image" v-if="options.image" class="custom-icon" />
-                <i class="vue-ui-toast-iconfont" :class="`vue-ui-icon-${options.icon}`" v-if="options.icon && !options.image"></i>
+                <img :src="options.image" v-if="options.image" class="custom-icon" :style="`${options.message ? '' : 'margin-bottom:0;'}`" />
+                <i class="vue-ui-toast-iconfont" :class="`vue-ui-icon-${options.icon}`" v-if="options.icon && !options.image" :style="`${options.message ? '' : 'margin-bottom:0;'}`"></i>
                 <div class="content">{{ options.message }}</div>
             </div>
         </div>
@@ -87,7 +87,7 @@ export default {
 
 .custom-icon {
     width: 40px;
-    margin-bottom: 10px;
+    margin-bottom: 0 30px 10px 30px;
 }
 .toast-mask {
     position: fixed;
@@ -104,12 +104,12 @@ export default {
 .toast-container {
     background: var(--vue-ui-dark-primary-bg-color);
     border-radius: 10px;
-    padding: 20px 30px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     max-width: 80%;
+    padding: 20px 0;
 }
 .vue-ui-theme-light {
     background: var(--vue-ui-light-primary-bg-color);
@@ -120,6 +120,7 @@ export default {
     font-size: var(--vue-ui-message-size);
     color: var(--vue-ui-dark-txt-color);
     text-align: center;
+    margin: 0 30px;
 }
 .vue-ui-theme-light .content {
     color: var(--vue-ui-light-txt-color);

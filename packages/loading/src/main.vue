@@ -33,8 +33,8 @@ export default {
                 return `${prop}:${val}px;`;
             }
         },
-        show(message, opts = {}) {
-            this.options = Object.assign({}, this.def, opts);
+        show(message, _opts = null) {
+            this.options = Object.assign({}, this.def, _opts);
             this.message = message;
             this.visible = true;
         },
