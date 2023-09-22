@@ -102,7 +102,7 @@ export default {
     /* background: #1e1e1e; */
     background: var(--vue-ui-dark-primary-bg-color);
     color: #eee;
-    border-radius: 10px;
+    border-radius: var(--vue-ui-border-radius);
     padding-top: 10px;
     width: 70%;
     overflow: hidden;

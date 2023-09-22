@@ -67,7 +67,7 @@ export default {
     /* background: rgba(0, 0, 0, 0.8); */
     background: var(--vue-ui-dark-primary-bg-color);
     padding: 25px 0;
-    border-radius: 10px;
+    border-radius: var(--vue-ui-border-radius);
     display: flex;
     flex-direction: column;
     align-items: center;

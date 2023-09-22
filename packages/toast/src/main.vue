@@ -103,7 +103,7 @@ export default {
 }
 .toast-container {
     background: var(--vue-ui-dark-primary-bg-color);
-    border-radius: 10px;
+    border-radius: var(--vue-ui-border-radius);
     display: flex;
     align-items: center;
     justify-content: center;

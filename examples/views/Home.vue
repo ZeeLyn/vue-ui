@@ -12,7 +12,7 @@
         <div class="row"><span>Radius:</span> <input type="range" min="1" max="300" v-model="loading.radius" step="1" />{{ loading.radius }}</div>
         <div class="row"><span>Width: </span><input type="range" min="1" max="300" v-model="loading.width" step="1" />{{ loading.width }}</div>
         <button @click="showLoading">Show loading</button>
-        <h1>Dialog</h1>
+        <h1>Alert</h1>
         <div class="row"><span>Title: </span><input type="text" v-model="alert.title" /></div>
         <div class="row"><span>Message: </span><input type="text" v-model="alert.message" /></div>
         <div class="row"><span>Width: </span><input type="range" min="1" max="300" v-model="alert.width" step="1" />{{ alert.width }}</div>
@@ -21,7 +21,7 @@
         <div class="row"><span>Cancel Button Text: </span><input type="text" v-model="alert.cancelText" /></div>
         <div class="row"><span>Confirm Button Color: </span><input type="color" v-model="alert.confirmColor" /></div>
         <div class="row"><span>Cancel Button Color: </span><input type="color" v-model="alert.cancelColor" /></div>
-        <button @click="showDialog">Show dialog</button>
+        <button @click="showDialog">Show alert</button>
 
         <h1>Toast</h1>
         <div class="row"><span>Message: </span><input type="text" v-model="toast.message" /></div>
@@ -36,6 +36,15 @@
         </div>
         <button @click="showToast()">Show toast</button>
         <button @click="showToast(require('../assets/error.png'))">Show custom image toast</button>
+
+        <h1>Mask</h1>
+        <button @click="showMask = true">Show Mask</button>
+        <vue-ui-mask v-if="showMask">
+            <div class="mask">
+                <h1>Title</h1>
+                <p>This is content!</p>
+            </div>
+        </vue-ui-mask>
     </div>
 </template>
 
@@ -60,15 +69,16 @@ export default {
                 message: "This is message",
                 confirmText: "OK",
                 cancelText: "Cancel",
-                confirmColor: "#ffffff",
+                confirmColor: "#4e98ec",
                 cancelColor: "#ff0000",
-                width: 200,
+                width: 260,
             },
             toast: {
                 message: "This is toast content!",
                 duration: 3000,
                 type: "",
             },
+            showMask: false,
         };
     },
     mounted() {
@@ -99,6 +109,7 @@ export default {
             // this.$alert("no null!");
 
             this.$alert({
+                theme: this.theme,
                 title: this.alert.title,
                 message: this.alert.message,
                 showCancel: true,
@@ -124,6 +135,7 @@ export default {
         showToast(img) {
             this.$toast
                 .show({
+                    theme: this.theme,
                     message: this.toast.message,
                     icon: this.toast.type,
                     width: parseInt(this.toast.width),
@@ -157,5 +169,12 @@ a {
 button {
     padding: 10px 20px;
     appearance: none;
+}
+.mask {
+    background: #fff;
+    width: 80%;
+    padding: 20px 0;
+    color: #333;
+    text-align: center;
 }
 </style>

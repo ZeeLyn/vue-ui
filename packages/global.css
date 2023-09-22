@@ -1,11 +1,12 @@
 :root {
-    --vue-ui-mask-bg-color: rgba(0, 0, 0, 0);
+    --vue-ui-mask-bg-color: rgba(0, 0, 0, 0.3);
     --vue-ui-dark-primary-bg-color: rgba(30, 30, 30, 1);
     --vue-ui-dark-txt-color: #fff;
     --vue-ui-light-primary-bg-color: rgba(255, 255, 255, 1);
     --vue-ui-light-txt-color: #1e1e1e;
     --vue-ui-title-size: 15px;
     --vue-ui-message-size: 14px;
+    --vue-ui-border-radius: 5px;
 }
 .vue-ui-fade-enter-active {
     animation: vue-ui-fade-in-out 0.2s forwards;

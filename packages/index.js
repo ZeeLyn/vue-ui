@@ -1,9 +1,10 @@
 import loading from "./loading/index";
 import alert from "./alert/index";
 import toast from "./toast/index";
+import mask from "./mask/index";
 
 // 以数组的结构保存组件，便于遍历
-const components = [loading, alert, toast];
+const components = [loading, alert, toast, mask];
 
 // 定义 install 方法
 const install = function (app, opts) {
