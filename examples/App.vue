@@ -1,9 +1,5 @@
 <template>
-    <div id="app">
-        <router-view />
-        <!-- <vue-ui-loading v-if="showLoading" :message="msg"></vue-ui-loading> -->
-        <!-- <vue-ui-alert :options="dialogOptions"></vue-ui-alert> -->
-    </div>
+    <router-view />
 </template>
 <script>
 export default {
@@ -20,14 +16,14 @@ export default {
     padding: 0;
 }
 body {
-    background: #4c4c4c;
+    background: #ccc;
 }
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #fff;
+    color: #333;
 }
 
 #nav {

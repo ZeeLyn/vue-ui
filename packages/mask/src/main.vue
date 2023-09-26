@@ -1,14 +1,12 @@
 <template>
-    <transition name="vue-ui-fade">
-        <Teleport :to="teleport">
-            <div class="vue-ui-mask" :style="backGround ? 'background:' + backGround : ''" v-if="lock" @mousewheel.prevent @touchmove.prevent>
-                <slot></slot>
-            </div>
-            <div class="vue-ui-mask" :style="backGround ? 'background:' + backGround : ''" v-else>
-                <slot></slot>
-            </div>
-        </Teleport>
-    </transition>
+    <Teleport :to="teleport">
+        <div class="vue-ui-mask" :style="backGround ? 'background:' + backGround : ''" v-if="lock" @mousewheel.prevent @touchmove.prevent>
+            <slot></slot>
+        </div>
+        <div class="vue-ui-mask" :style="backGround ? 'background:' + backGround : ''" v-else>
+            <slot></slot>
+        </div>
+    </Teleport>
 </template>
 <script>
 export default {

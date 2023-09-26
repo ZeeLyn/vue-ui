@@ -1,17 +1,29 @@
 <template>
-    <transition name="vue-ui-fade">
-        <div class="load-container" :class="`vue-ui-theme-${options.theme}`" v-if="visible" @touchmove.prevent @mousewheel.prevent>
-            <div class="loader" :style="`${_readerStyle('min-width', options.minWidth)}${_readerStyle('max-width', options.maxWidth)}${_readerStyle('width', options.width)}`">
-                <div class="loading" :style="`width:${options.radius}px;height:${options.radius}px;`"></div>
-                <label v-show="message">{{ message }}</label>
-            </div>
-        </div>
-    </transition>
+    <div>
+        <Mask v-if="visible && options.mask">
+            <transition name="vue-ui-fade">
+                <div class="loader" :class="`vue-ui-theme-${options.theme}`" :style="`${_readerStyle('min-width', options.minWidth)}${_readerStyle('max-width', options.maxWidth)}${_readerStyle('width', options.width)}`">
+                    <div class="loading" :style="`width:${options.radius}px;height:${options.radius}px;`"></div>
+                    <label v-show="message">{{ message }}</label>
+                </div>
+            </transition>
+        </Mask>
+        <Teleport to="body" v-if="visible && !options.mask">
+            <transition name="vue-ui-fade">
+                <div class="loader" :class="`vue-ui-theme-${options.theme}`" :style="`${_readerStyle('min-width', options.minWidth)}${_readerStyle('max-width', options.maxWidth)}${_readerStyle('width', options.width)}`">
+                    <div class="loading" :style="`width:${options.radius}px;height:${options.radius}px;`"></div>
+                    <label v-show="message">{{ message }}</label>
+                </div>
+            </transition>
+        </Teleport>
+    </div>
 </template>
 
 <script>
+import Mask from "../../mask/src/main.vue";
 export default {
     name: "vue-ui-loading",
+    components: { Mask },
     props: {
         opts: Object,
     },
@@ -23,7 +35,7 @@ export default {
         };
     },
     mounted() {
-        this.def = Object.assign({ theme: "dark", width: 0, minWidth: 160, maxWidth: 300, radius: 40 }, this.opts);
+        this.def = Object.assign({ theme: "dark", width: 0, minWidth: 160, maxWidth: 300, radius: 40, mask: true }, this.opts);
     },
     methods: {
         _readerStyle(prop, val) {
@@ -49,7 +61,7 @@ export default {
 <style scoped>
 @import url("../../global.css");
 
-.load-container {
+/* .load-container {
     font-family: "PingFangSC-Regular", "Microsoft YaHei", Helvetica, Arial, sans-serif;
     position: fixed;
     left: 0;
@@ -62,8 +74,8 @@ export default {
     justify-content: center;
     flex-direction: column;
     z-index: 9999998;
-}
-.load-container .loader {
+} */
+.loader {
     /* background: rgba(0, 0, 0, 0.8); */
     background: var(--vue-ui-dark-primary-bg-color);
     padding: 25px 0;
@@ -72,12 +84,16 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
 }
-.vue-ui-theme-light .loader {
+.vue-ui-theme-light {
     background: var(--vue-ui-light-primary-bg-color);
 }
 
-.load-container .loading {
+.loading {
     position: relative;
     border-top: 4px solid rgba(255, 255, 255, 0.2);
     border-right: 4px solid rgba(255, 255, 255, 0.2);
@@ -98,13 +114,13 @@ export default {
     border-bottom: 4px solid #ccc;
 }
 
-.load-container .loader label {
+.loader label {
     font-size: var(--vue-ui-message-size);
     margin: 10px 25px 0 25px;
     color: var(--vue-ui-dark-txt-color);
     text-align: center;
 }
-.vue-ui-theme-light .loader label {
+.vue-ui-theme-light label {
     color: var(--vue-ui-light-txt-color);
 }
 

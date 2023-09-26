@@ -1,25 +1,48 @@
 <template>
-    <transition name="vue-ui-fade">
-        <div class="dialog-mask" v-if="visible" @touchmove.prevent @mousewheel.prevent>
-            <div class="dialog-container" :class="`vue-ui-theme-${options.theme}`" :style="`${_readerStyle('min-width', options.minWidth)}${_readerStyle('max-width', options.maxWidth)}${_readerStyle('width', options.width)}`">
-                <div class="title" v-show="options.title">{{ options.title }}</div>
-                <div class="content">{{ options.message }}</div>
-                <div class="oper">
-                    <div class="cancel-btn" :style="'color:' + options.cancelColor" v-show="options.showCancel" @click="_onCancel">
-                        {{ options.cancelText }}
-                    </div>
-                    <div :style="'color:' + options.confirmColor" @click="_onConfirm">
-                        {{ options.confirmText }}
+    <!-- <div class="dialog-mask" @touchmove.prevent @mousewheel.prevent> -->
+    <div>
+        <Mask v-if="visible && options.mask">
+            <transition name="vue-ui-fade">
+                <div class="dialog-container" :class="`vue-ui-theme-${options.theme}`" :style="`${_readerStyle('min-width', options.minWidth)}${_readerStyle('max-width', options.maxWidth)}${_readerStyle('width', options.width)}`">
+                    <div class="title" v-show="options.title">{{ options.title }}</div>
+                    <div class="content">{{ options.message }}</div>
+                    <div class="oper">
+                        <div class="cancel-btn" :style="'color:' + options.cancelColor" v-show="options.showCancel" @click="_onCancel">
+                            {{ options.cancelText }}
+                        </div>
+                        <div :style="'color:' + options.confirmColor" @click="_onConfirm">
+                            {{ options.confirmText }}
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </transition>
+            </transition>
+        </Mask>
+
+        <Teleport to="body" v-if="visible && !options.mask">
+            <transition name="vue-ui-fade">
+                <div class="dialog-container" :class="`vue-ui-theme-${options.theme}`" :style="`${_readerStyle('min-width', options.minWidth)}${_readerStyle('max-width', options.maxWidth)}${_readerStyle('width', options.width)}`">
+                    <div class="title" v-show="options.title">{{ options.title }}</div>
+                    <div class="content">{{ options.message }}</div>
+                    <div class="oper">
+                        <div class="cancel-btn" :style="'color:' + options.cancelColor" v-show="options.showCancel" @click="_onCancel">
+                            {{ options.cancelText }}
+                        </div>
+                        <div :style="'color:' + options.confirmColor" @click="_onConfirm">
+                            {{ options.confirmText }}
+                        </div>
+                    </div>
+                </div>
+            </transition>
+        </Teleport>
+    </div>
+    <!-- </div> -->
 </template>
 
 <script>
+import Mask from "../../mask/src/main.vue";
 export default {
     name: "vue-ui-alert",
+    components: { Mask },
     props: {
         opts: Object,
     },
@@ -45,6 +68,7 @@ export default {
                 cancelColor: "#b2b2b4",
                 onConfirm: null,
                 onCancel: null,
+                mask: true,
             },
             this.opts
         );
@@ -85,18 +109,6 @@ export default {
 <style scoped>
 @import url("../../global.css");
 
-.dialog-mask {
-    position: fixed;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    background: var(--vue-ui-mask-bg-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999999;
-}
 .dialog-container {
     font-family: "PingFangSC-Regular", "Microsoft YaHei", Helvetica, Arial, sans-serif;
     /* background: #1e1e1e; */
@@ -106,6 +118,11 @@ export default {
     padding-top: 10px;
     width: 70%;
     overflow: hidden;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    box-sizing: border-box;
 }
 .vue-ui-theme-light {
     background: var(--vue-ui-light-primary-bg-color);
@@ -115,13 +132,13 @@ export default {
     font-weight: 800;
     padding: 0 15px 0 15px;
     color: var(--vue-ui-dark-txt-color);
-    margin-top: 10px;
+    margin-top: 5px;
     text-align: center;
 }
 
 .dialog-container .content {
     padding: 0 15px 0 15px;
-    margin: 20px 0 30px 0;
+    margin: 10px 0 20px 0;
     font-size: var(--vue-ui-message-size);
     color: var(--vue-ui-dark-txt-color);
     text-align: center;

@@ -11,6 +11,7 @@
         <div class="row"><span>Loading text: </span><input type="text" v-model="loading.message" /></div>
         <div class="row"><span>Radius:</span> <input type="range" min="1" max="300" v-model="loading.radius" step="1" />{{ loading.radius }}</div>
         <div class="row"><span>Width: </span><input type="range" min="1" max="300" v-model="loading.width" step="1" />{{ loading.width }}</div>
+        <div class="row"><span>Show mask: </span><input type="checkbox" v-model="loading.mask" /></div>
         <button @click="showLoading">Show loading</button>
         <h1>Alert</h1>
         <div class="row"><span>Title: </span><input type="text" v-model="alert.title" /></div>
@@ -21,12 +22,13 @@
         <div class="row"><span>Cancel Button Text: </span><input type="text" v-model="alert.cancelText" /></div>
         <div class="row"><span>Confirm Button Color: </span><input type="color" v-model="alert.confirmColor" /></div>
         <div class="row"><span>Cancel Button Color: </span><input type="color" v-model="alert.cancelColor" /></div>
+        <div class="row"><span>Show mask: </span><input type="checkbox" v-model="alert.mask" /></div>
         <button @click="showDialog">Show alert</button>
 
         <h1>Toast</h1>
         <div class="row"><span>Message: </span><input type="text" v-model="toast.message" /></div>
         <div class="row"><span>Width: </span><input type="range" min="1" max="300" v-model="toast.width" step="1" />{{ toast.width }}</div>
-        <div class="row"><span>Duration: </span><input type="range" min="1000" max="10000" v-model="toast.duration" step="1" />{{ toast.duration }}</div>
+        <div class="row"><span>Duration: </span><input type="range" min="1000" max="100000" v-model="toast.duration" step="1" />{{ toast.duration }}</div>
         <div class="row">
             <span>Type:</span>
             <label><input type="radio" name="type" value="" v-model="toast.type" />None </label>
@@ -34,6 +36,7 @@
             <label><input type="radio" name="type" value="warning" v-model="toast.type" />Warning </label>
             <label><input type="radio" name="type" value="error" v-model="toast.type" />Error </label>
         </div>
+        <div class="row"><span>Show mask: </span><input type="checkbox" v-model="toast.mask" /></div>
         <button @click="showToast()">Show toast</button>
         <button @click="showToast(require('../assets/error.png'))">Show custom image toast</button>
 
@@ -63,6 +66,7 @@ export default {
                 message: "loading...",
                 radius: 40,
                 width: 160,
+                mask: true,
             },
             alert: {
                 title: "This is title",
@@ -72,11 +76,13 @@ export default {
                 confirmColor: "#4e98ec",
                 cancelColor: "#ff0000",
                 width: 260,
+                mask: true,
             },
             toast: {
                 message: "This is toast content!",
                 duration: 3000,
                 type: "",
+                mask: true,
             },
             showMask: false,
         };
@@ -97,8 +103,11 @@ export default {
 
             this.$loading.show(this.loading.message, {
                 theme: this.theme,
+                mask: this.loading.mask,
                 radius: parseInt(this.loading.radius),
                 width: parseInt(this.loading.width),
+                minWidth: parseInt(this.minWidth),
+                maxWidth: parseInt(this.maxWidth),
             });
             var self = this;
             setTimeout(() => {
@@ -118,6 +127,9 @@ export default {
                 confirmColor: this.alert.confirmColor,
                 cancelColor: this.alert.cancelColor,
                 width: parseInt(this.alert.width),
+                minWidth: parseInt(this.minWidth),
+                maxWidth: parseInt(this.maxWidth),
+                mask: this.alert.mask,
                 onConfirm: () => {
                     console.warn("click ok");
                 },
@@ -141,6 +153,7 @@ export default {
                     width: parseInt(this.toast.width),
                     duration: parseInt(this.toast.duration),
                     image: img,
+                    mask: this.toast.mask,
                 })
                 .then(() => {
                     console.log("toast closed");

@@ -1,18 +1,31 @@
 <template>
-    <transition name="vue-ui-fade">
-        <div class="toast-mask" v-if="visible" @touchmove.prevent @mousewheel.prevent>
-            <div class="toast-container" :class="`vue-ui-theme-${options.theme}`" :style="`${_readerStyle('min-width', options.minWidth)}${_readerStyle('max-width', options.maxWidth)}${_readerStyle('width', options.width)}`">
-                <img :src="options.image" v-if="options.image" class="custom-icon" :style="`${options.message ? '' : 'margin-bottom:0;'}`" />
-                <i class="vue-ui-toast-iconfont" :class="`vue-ui-icon-${options.icon}`" v-if="options.icon && !options.image" :style="`${options.message ? '' : 'margin-bottom:0;'}`"></i>
-                <div class="content">{{ options.message }}</div>
-            </div>
-        </div>
-    </transition>
+    <div>
+        <Mask v-if="visible && options.mask">
+            <transition name="vue-ui-fade">
+                <div class="toast-container" :class="`vue-ui-theme-${options.theme}`" :style="`${_readerStyle('min-width', options.minWidth)}${_readerStyle('max-width', options.maxWidth)}${_readerStyle('width', options.width)}`">
+                    <img :src="options.image" v-if="options.image" class="custom-icon" :style="`${options.message ? '' : 'margin-bottom:0;'}`" />
+                    <i class="vue-ui-toast-iconfont" :class="`vue-ui-icon-${options.icon}`" v-if="options.icon && !options.image" :style="`${options.message ? '' : 'margin-bottom:0;'}`"></i>
+                    <div class="content">{{ options.message }}</div>
+                </div>
+            </transition>
+        </Mask>
+        <Teleport to="body" v-if="visible && !options.mask">
+            <transition name="vue-ui-fade">
+                <div class="toast-container" :class="`vue-ui-theme-${options.theme}`" :style="`${_readerStyle('min-width', options.minWidth)}${_readerStyle('max-width', options.maxWidth)}${_readerStyle('width', options.width)}`">
+                    <img :src="options.image" v-if="options.image" class="custom-icon" :style="`${options.message ? '' : 'margin-bottom:0;'}`" />
+                    <i class="vue-ui-toast-iconfont" :class="`vue-ui-icon-${options.icon}`" v-if="options.icon && !options.image" :style="`${options.message ? '' : 'margin-bottom:0;'}`"></i>
+                    <div class="content">{{ options.message }}</div>
+                </div>
+            </transition>
+        </Teleport>
+    </div>
 </template>
 
 <script>
+import Mask from "../../mask/src/main.vue";
 export default {
     name: "vue-ui-toast",
+    components: { Mask },
     props: {
         opts: Object,
     },
@@ -23,7 +36,7 @@ export default {
         };
     },
     mounted() {
-        this.def = Object.assign({ theme: "dark", width: 0, minWidth: 160, maxWidth: 300, radius: 40, duration: 3000 }, this.opts);
+        this.def = Object.assign({ theme: "dark", width: 0, minWidth: 160, maxWidth: 300, radius: 40, duration: 3000, mask: true }, this.opts);
     },
     methods: {
         _readerStyle(prop, val) {
@@ -50,6 +63,9 @@ export default {
             this.visible = false;
             if (this.timer) clearTimeout(this.timer);
         },
+    },
+    beforeUnmount() {
+        if (this.timer) clearTimeout(this.timer);
     },
 };
 </script>
@@ -89,18 +105,7 @@ export default {
     width: 40px;
     margin-bottom: 0 30px 10px 30px;
 }
-.toast-mask {
-    position: fixed;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    background: var(--vue-ui-mask-bg-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999999;
-}
+
 .toast-container {
     background: var(--vue-ui-dark-primary-bg-color);
     border-radius: var(--vue-ui-border-radius);
@@ -109,7 +114,12 @@ export default {
     justify-content: center;
     flex-direction: column;
     max-width: 80%;
-    padding: 20px 0;
+    padding: 15px 0;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    /* box-sizing: border-box; */
 }
 .vue-ui-theme-light {
     background: var(--vue-ui-light-primary-bg-color);
@@ -120,7 +130,7 @@ export default {
     font-size: var(--vue-ui-message-size);
     color: var(--vue-ui-dark-txt-color);
     text-align: center;
-    margin: 0 30px;
+    margin: 0 15px;
 }
 .vue-ui-theme-light .content {
     color: var(--vue-ui-light-txt-color);
