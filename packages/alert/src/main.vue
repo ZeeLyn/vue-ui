@@ -123,6 +123,7 @@ export default {
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
     box-sizing: border-box;
+    z-index: 99999;
 }
 .vue-ui-theme-light {
     background: var(--vue-ui-light-primary-bg-color);
