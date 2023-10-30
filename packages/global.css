@@ -7,6 +7,7 @@
     --vue-ui-title-size: 15px;
     --vue-ui-message-size: 14px;
     --vue-ui-border-radius: 5px;
+    --vue-ui-mask-z-index: 99999;
 }
 .vue-ui-fade-enter-active {
     animation: vue-ui-fade-in-out 0.2s forwards;

@@ -79,7 +79,7 @@ export default {
 
 .vue-ui-toast-iconfont {
     font-family: "vue-ui-toast-iconfont" !important;
-    font-size: 40px;
+    font-size: 30px;
     font-style: normal;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -102,7 +102,7 @@ export default {
 }
 
 .custom-icon {
-    width: 40px;
+    width: 30px;
     margin-bottom: 0 30px 10px 30px;
 }
 
@@ -120,7 +120,7 @@ export default {
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
     /* box-sizing: border-box; */
-    z-index: 99999;
+    z-index: var(--vue-ui-mask-z-index);
 }
 .vue-ui-theme-light {
     background: var(--vue-ui-light-primary-bg-color);

@@ -88,7 +88,7 @@ export default {
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
-    z-index: 99999;
+    z-index: var(--vue-ui-mask-z-index);
 }
 .vue-ui-theme-light {
     background: var(--vue-ui-light-primary-bg-color);
